@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Log In</button>
+        <p id="error-msg" style="color: red; font-size: 0.9em;"></p>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-page" class="container hidden">
+        <h2>Welcome, <span id="user-display"></span>!</h2>
+        <p>You have successfully logged in.</p>
+        <button onclick="logout()">Log Out</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+
+            // Basic Authentication Logic
+            if (username === "admin" && password === "password") {
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('welcome-page').classList.remove('hidden');
+                document.getElementById('user-display').innerText = username;
+                errorMsg.innerText = "";
+            } else {
+                errorMsg.innerText = "Invalid username or password!";
+            }
+        }
+
+        function logout() {
+            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('username').value = "";
+            document.getElementById('password').value = "";
+        }
+    </script>
+</body>
+</html>
